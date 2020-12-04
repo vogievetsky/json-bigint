@@ -1,6 +1,6 @@
 # json-bigint-native
 
-This is a fork of https://github.com/sidorares/json-bigint but without bignumber.js, only BigInt with anumber of other changes.
+This is a fork of https://github.com/sidorares/json-bigint (at version 1.0.0) but without bignumber.js, only BigInt with a number of other changes.
 
 Other changes from sidorares/json-bigint:
 
