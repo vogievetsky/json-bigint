@@ -1,8 +1,9 @@
 {
-  "name": "json-bigint",
+  "name": "json-bigint-native",
   "version": "1.0.0",
   "description": "JSON.parse with bigints support",
   "main": "index.js",
+  "typings": "index.d.ts",
   "files": [
     "index.js",
     "lib/parse.js",
@@ -13,20 +14,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:sidorares/json-bigint.git"
+    "url": "git@github.com:vogievetsky/json-bigint.git"
   },
   "keywords": [
     "JSON",
     "bigint",
-    "bignumber",
     "parse",
     "json"
   ],
-  "author": "Andrey Sidorov <sidorares@yandex.ru>",
   "license": "MIT",
-  "dependencies": {
-    "bignumber.js": "^9.0.0"
-  },
   "devDependencies": {
     "chai": "4.2.0",
     "mocha": "8.0.1"

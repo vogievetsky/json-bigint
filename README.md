@@ -1,11 +1,21 @@
-# json-bigint
+# json-bigint-native
 
-[![Build Status](https://secure.travis-ci.org/sidorares/json-bigint.png)](http://travis-ci.org/sidorares/json-bigint)
-[![NPM](https://nodei.co/npm/json-bigint.png?downloads=true&stars=true)](https://nodei.co/npm/json-bigint/)
+This is a fork of https://github.com/sidorares/json-bigint but without bignumber.js, only BigInt with anumber of other changes.
 
-JSON.parse/stringify with bigints support. Based on Douglas Crockford [JSON.js](https://github.com/douglascrockford/JSON-js) package and [bignumber.js](https://github.com/MikeMcl/bignumber.js) library.
+Other changes from sidorares/json-bigint:
 
-Native `Bigint` was added to JS recently, so we added an option to leverage it instead of `bignumber.js`. However, the parsing with native `BigInt` is kept an option for backward compability.
+- Remove `bignumber.js` depedancy
+- Remove `useNativeBigInt` option (it is always `true`)
+- `protoAction` and `constructorAction` default to `'preserve'`
+- Fix https://github.com/sidorares/json-bigint/issues/42 by removing template strings in internal implantation
+- Removed `alwaysParseAsBig` option
+- Moved all the options to the 3rd argument of parse
+- Fixed parsing of long floats
+- Added typescipt types
+
+The rest is edited to remove `bignumber.js` mentions.
+
+JSON.parse/stringify with bigints support. Based on Douglas Crockford [JSON.js](https://github.com/douglascrockford/JSON-js) package and BigInt.
 
 While most JSON parsers assume numeric values have same precision restrictions as IEEE 754 double, JSON specification _does not_ say anything about number precision. Any floating point number in decimal (optionally scientific) notation is valid JSON value. It's a good idea to serialize values which might fall out of IEEE 754 integer precision as strings in your JSON api, but `{ "value" : 9223372036854775807}`, for example, is still a valid RFC4627 JSON string, and in most JS runtimes the result of `JSON.parse` is this object: `{ value: 9223372036854776000 }`
 
@@ -14,7 +24,7 @@ While most JSON parsers assume numeric values have same precision restrictions a
 example:
 
 ```js
-var JSONbig = require('json-bigint');
+var JSONbig = require('json-bigint-native');
 
 var json = '{ "value" : 9223372036854775807, "v2": 123 }';
 console.log('Input:', json);

@@ -1,8 +1,9 @@
 var mocha  = require('mocha')
   , assert = require('chai').assert
   , expect = require('chai').expect
-  , BigNumber = require('bignumber.js')
   ;
+
+  var JSONbig = require('../index');
 
 describe("Testing bigint support", function(){
     var input = '{"big":9223372036854775807,"small":123}';
@@ -14,18 +15,6 @@ describe("Testing bigint support", function(){
 
         var output = JSON.stringify(obj);
         expect(output).to.not.equal(input);
-        done();
-    });
-
-    it("Should show JSONbig does support bigint parse/stringify roundtrip", function(done){
-        var JSONbig = require('../index');
-        var obj = JSONbig.parse(input);
-        expect(obj.small.toString(), "string from small int").to.equal("123");
-        expect(obj.big.toString(), "string from big int").to.equal("9223372036854775807");
-        expect(obj.big, "instanceof big int").to.be.instanceof(BigNumber);
-
-        var output = JSONbig.stringify(obj);
-        expect(output).to.equal(input);
         done();
     });
 });
