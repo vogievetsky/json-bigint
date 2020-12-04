@@ -1,6 +1,6 @@
 # json-bigint-native
 
-This is a fork of https://github.com/sidorares/json-bigint (at version 1.0.0) but without bignumber.js, only BigInt with a number of other changes.
+This is a fork of https://github.com/sidorares/json-bigint (at version 1.0.0) but without bignumber.js, only BigInt with a number of other (breaking) changes.
 
 Other changes from sidorares/json-bigint:
 
@@ -12,8 +12,9 @@ Other changes from sidorares/json-bigint:
 - Moved all the options to the 3rd argument of parse
 - Fixed parsing of long floats
 - Added typescipt types
+- Changed `storeAsString` to accept: 'never', 'always', 'fallback'
 
-The rest is edited to remove `bignumber.js` mentions.
+The rest is edited from the original.
 
 JSON.parse/stringify with bigints support. Based on Douglas Crockford [JSON.js](https://github.com/douglascrockford/JSON-js) package and BigInt.
 
@@ -100,7 +101,7 @@ Succesfully catched expected exception on duplicate keys: {"name":"SyntaxError",
 
 ```
 
-#### options.storeAsString, boolean, default false
+#### options.storeAsString, enum, default false
 
 Specifies if BigInts should be stored in the object as a string, rather than the default BigNumber.
 
@@ -132,81 +133,9 @@ Default type: object, With option type: string
 
 ```
 
-#### options.useNativeBigInt, boolean, default false
+#### options.protoAction, enum, default: "ignore". Possible values: "error", "ignore", "preserve"
 
-Specifies if parser uses native BigInt instead of bignumber.js
-
-example:
-
-```js
-var JSONbig = require('json-bigint');
-var JSONbigNative = require('json-bigint')({ useNativeBigInt: true });
-var key = '{ "key": 993143214321423154315154321 }';
-console.log(`\n\nStoring the Number as native BigInt, instead of a BigNumber`);
-console.log('Input:', key);
-var normal = JSONbig.parse(key);
-var nativeBigInt = JSONbigNative.parse(key);
-console.log(
-  'Default type: %s, With option type: %s',
-  typeof normal.key,
-  typeof nativeBigInt.key
-);
-```
-
-Output
-
-```
-Storing the Number as native BigInt, instead of a BigNumber
-Input: { "key": 993143214321423154315154321 }
-Default type: object, With option type: bigint
-
-```
-
-#### options.alwaysParseAsBig, boolean, default false
-
-Specifies if all numbers should be stored as BigNumber.
-
-Note that this is a dangerous behavior as it breaks the default functionality of being able to convert back-and-forth without data type changes (as this will convert all Number to be-and-stay BigNumber)
-
-example:
-
-```js
-var JSONbig = require('json-bigint');
-var JSONbigAlways = require('json-bigint')({ alwaysParseAsBig: true });
-var key = '{ "key": 123 }'; // there is no need for BigNumber by default, but we're forcing it
-console.log(`\n\nStoring the Number as a BigNumber, instead of a Number`);
-console.log('Input:', key);
-var normal = JSONbig.parse(key);
-var always = JSONbigAlways.parse(key);
-console.log(
-  'Default type: %s, With option type: %s',
-  typeof normal.key,
-  typeof always.key
-);
-```
-
-Output
-
-```
-Storing the Number as a BigNumber, instead of a Number
-Input: { "key": 123 }
-Default type: number, With option type: object
-
-```
-
-If you want to force all numbers to be parsed as native `BigInt`
-(you probably do! Otherwise any calulations become a real headache):
-
-```js
-var JSONbig = require('json-bigint')({
-  alwaysParseAsBig: true,
-  useNativeBigInt: true,
-});
-```
-
-#### options.protoAction, boolean, default: "error". Possible values: "error", "ignore", "preserve"
-
-#### options.constructorAction, boolean, default: "error". Possible values: "error", "ignore", "preserve"
+#### options.constructorAction, enum, default: "ignore". Possible values: "error", "ignore", "preserve"
 
 Controls how `__proto__` and `constructor` properties are treated. If set to "error" they are not allowed and
 parse() call will throw an error. If set to "ignore" the prroperty and it;s value is skipped from parsing and object building.

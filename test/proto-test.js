@@ -13,7 +13,7 @@ describe('__proto__ and constructor assignment', function () {
     expect(() => {
       JSONbig.parse('', undefined, { protoAction: 'invalid value' });
     }).to.throw(
-      'Incorrect value for protoAction option, must be "error", "ignore" or undefined but passed invalid value'
+      'Incorrect value for protoAction option, must be "error", "ignore", "preserve" or undefined but passed invalid value'
     );
   });
 
@@ -21,7 +21,7 @@ describe('__proto__ and constructor assignment', function () {
     expect(() => {
       JSONbig.parse('', undefined, { constructorAction: 'invalid value' });
     }).to.throw(
-      'Incorrect value for constructorAction option, must be "error", "ignore" or undefined but passed invalid value'
+      'Incorrect value for constructorAction option, must be "error", "ignore", "preserve" or undefined but passed invalid value'
     );
   });
 

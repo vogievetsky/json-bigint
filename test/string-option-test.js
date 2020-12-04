@@ -14,7 +14,7 @@ describe("Testing 'storeAsString' option", function(){
     });
 
     it("Should show that key is of type string, when storeAsString option is true", function(done){
-        var result = JSONbig.parse(key, undefined, {"storeAsString": true});
+        var result = JSONbig.parse(key, undefined, {"storeAsString": "always"});
         expect(typeof result.key).to.equal("string");
         done();
     });

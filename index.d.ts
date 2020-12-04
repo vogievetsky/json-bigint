@@ -1,6 +1,6 @@
 export interface ParseOptions {
     strict: boolean;
-    storeAsString: boolean;
+    storeAsString: 'never' | 'always' | 'fallback';
     protoAction: 'preserve' | 'ignore' | 'error';
     constructorAction: 'preserve' | 'ignore' | 'error';
 }
