@@ -71,8 +71,7 @@ Setting options.strict = true will fail-fast on such duplicate-key occurances an
 example:
 
 ```js
-var JSONbig = require('json-bigint');
-var JSONstrict = require('json-bigint')({ strict: true });
+var JSONbig = require('json-bigint-native');
 
 var dupkeys = '{ "dupkey": "value 1", "dupkey": "value 2"}';
 console.log('\n\nDuplicate Key test with both lenient and strict JSON parsing');
@@ -81,7 +80,7 @@ var works = JSONbig.parse(dupkeys);
 console.log('JSON.parse(dupkeys).dupkey: %s', works.dupkey);
 var fails = 'will stay like this';
 try {
-  fails = JSONstrict.parse(dupkeys);
+  fails = JSONbig.parse(dupkeys, undfined, { strict: true });
   console.log('ERROR!! Should never get here');
 } catch (e) {
   console.log(
@@ -110,8 +109,8 @@ Note that this is a dangerous behavior as it breaks the default functionality of
 example:
 
 ```js
-var JSONbig = require('json-bigint');
-var JSONbigString = require('json-bigint')({ storeAsString: true });
+var JSONbig = require('json-bigint-native');
+var JSONbigString = require('json-bigint-native')({ storeAsString: true });
 var key = '{ "key": 1234567890123456789 }';
 console.log('\n\nStoring the BigInt as a string, instead of a BigNumber');
 console.log('Input:', key);
@@ -145,7 +144,7 @@ is not vulnerable to prototype poisoning attacks.
 example:
 
 ```js
-var JSONbigAlways = require('json-bigint')({ protoAction: 'ignore' });
+var JSONbigAlways = require('json-bigint-native')({ protoAction: 'ignore' });
 const user = JSONbig.parse('{ "__proto__": { "admin": true }, "id": 12345 }');
 // => result is { id: 12345 }
 ```
