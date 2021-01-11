@@ -12,7 +12,8 @@ Other changes from sidorares/json-bigint:
 - Moved all the options to the 3rd argument of parse
 - Fixed parsing of long floats
 - Added typescipt types
-- Changed `storeAsString` to accept: 'never', 'always', 'fallback'
+- Removed `storeAsString` option
+- Added `fallbackTo` option `number`, `string`, `error`
 
 The rest is edited from the original.
 
